@@ -1,0 +1,90 @@
+Tugas Python Gheryyan Washesya Syagara -- I.2211099
+-------------------
+
+import os
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+list_data = []
+
+def show_menu():
+    while True:
+        clear_screen()
+        print("=== APLIKASI DATA MAHASISWA ===")
+        print("[1] Lihat Data")
+        print("[2] Tambah Data")
+        print("[3] Edit Data")
+        print("[4] Hapus Data")
+        print("[0] Exit")
+        print("---------")
+        menu = input("pilih menu>")
+
+        if menu == '1':
+            menu1()
+        elif menu == '2':
+            menu2()
+        elif menu == '3':
+            menu3()
+        elif menu == '4':
+            menu4()
+        elif menu == '0':
+            print("Terimakasih telah berkunjung")
+            exit()
+        else:
+            print("Menu yang anda masukan tidak tersedia, masukkan pilihan yang tersedia !")
+
+def menu1():
+    print('---------------------')
+    print('Nama            Nim')
+    index = 1
+    if len(list_data) <= 0:
+        print('Data masih kosong')
+    else:
+        for data in list_data:
+            nim, nama = data.split(" - ")
+            print(f"{nim}\t\t{nama}")
+            index += 1
+    kembali()
+
+def menu2():
+    nama = input("Masukkan Nama Anda: ")
+    nim = input("Masukkan NIM Anda: ")
+    data = f"{nama} - {nim}"  
+    list_data.append(data)
+    print("Data Berhasil Ditambahkan")
+    kembali()
+
+def menu3():
+    nim = input('Masukkan NIM: ')
+    for i, data in enumerate(list_data):
+        if nim in data:
+            nama_lama = data
+            nama_baru = input('Masukkan Nama Baru: ')
+            list_data[i] = f"{nama_baru} - {nim}"  
+            print('Nama Anda Telah Dirubah')
+            break
+    else:
+        print("Data NIM tersebut tidak ditemukan")
+    kembali()
+
+
+def menu4():
+    nim = input("Masukkan Nomor Nim: ")
+    found = False
+    for i, data in enumerate(list_data):
+        if nim in data:
+            found = True
+            del list_data[i]
+            print("Data dengan NIM tersebut berhasil dihapus")
+            break
+    else:
+        print("Data dengan NIM tersebut tidak ditemukan")
+    kembali()
+
+
+def kembali():
+    print("\n")
+    input("tekan enter untuk kembali..")
+
+show_menu()
